@@ -23,6 +23,7 @@ module SearchParser
   # :base is the "thing" that is subjected to parenthesizing and
   # boolean operations
   module BooleanSkeleton
+    include Parslet
     include Basics
 
 
@@ -38,6 +39,10 @@ module SearchParser
       define_singleton_method(:not_op) { op_parser.not_op }
     end
 
+    # But until you call setup_operators, use the defaults
+    rule(:and_op) { DEFAULT_OP_PARSER.and_op }
+    rule(:or_op)  { DEFAULT_OP_PARSER.or_op  }
+    rule(:not_op) { DEFAULT_OP_PARSER.not_op }
 
     rule(:any_op)   { not_op | or_op | and_op }
 

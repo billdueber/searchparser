@@ -6,6 +6,7 @@ module SearchParser
   class Parens < Parslet::Parser
     include Basics
 
+
     rule(:nonparens) { match['^\\(\\)'].repeat(1) }
 
     rule(:balanced_parens) { lp >> balanced_parens.repeat(0) >> rp | nonparens}
@@ -24,7 +25,7 @@ module SearchParser
   # Another little mini-parser used to check if the given string
   # has balanced double-quotes
   class DoubleQuotes < Parslet::Parser
-    include ParseBasics
+    include Basics
     rule(:nonquotes) { match['^"'].repeat(1) }
     rule(:quoted)    { dq >> nonquotes >> dq }
     rule(:double_quotes_balanced_string) { (quoted | nonquotes).repeat(0) }
