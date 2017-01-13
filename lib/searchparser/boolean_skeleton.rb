@@ -9,9 +9,9 @@ module SearchParser
   class UppercaseEnglishOps < Parslet::Parser
     include Basics
 
-    rule(:and_op) { space >> str('AND') >> space }
-    rule(:or_op) { space >> str('OR') >> space }
-    rule(:not_op) { space >> str('NOT') >> space }
+    rule(:and_op) { space? >> str('AND') >> space? }
+    rule(:or_op) { space? >> str('OR') >> space? }
+    rule(:not_op) { space? >> str('NOT') >> space? }
 
   end
 
@@ -37,6 +37,7 @@ module SearchParser
       define_singleton_method(:and_op) { op_parser.and_op }
       define_singleton_method(:or_op) { op_parser.or_op }
       define_singleton_method(:not_op) { op_parser.not_op }
+      self
     end
 
     # But until you call setup_operators, use the defaults
