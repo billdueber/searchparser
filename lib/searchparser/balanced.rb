@@ -16,7 +16,7 @@ module SearchParser
     def balanced?(str)
       self.parse(str)
       true
-    rescue Parslet::ParseFailed => e
+    rescue Parslet::ParseFailed
       false
     end
 
@@ -27,14 +27,14 @@ module SearchParser
   class DoubleQuotes < Parslet::Parser
     include Basics
     rule(:nonquotes) { match['^"'].repeat(1) }
-    rule(:quoted)    { dq >> nonquotes >> dq }
+    rule(:quoted)    { dq >> nonquotes >> dq | dq >> dq}
     rule(:double_quotes_balanced_string) { (quoted | nonquotes).repeat(0) }
     root(:double_quotes_balanced_string)
 
     def balanced?(str)
       self.parse(str)
       true
-    rescue Parslet::ParseFailed => e
+    rescue Parslet::ParseFailed
       false
     end
 
