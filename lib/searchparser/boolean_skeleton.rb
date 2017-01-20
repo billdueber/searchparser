@@ -53,9 +53,5 @@ module SearchParser
     rule(:or_expr)  { (and_expr.as(:left) >> or_op >> or_expr.as(:right)).as(:or) | and_expr }
 
     rule(:expr) { (or_expr >> not_expr.repeat(0)).as(:search) }
-
-
   end
-
-
 end
