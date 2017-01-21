@@ -1,3 +1,3 @@
 require "searchparser/version"
 require 'searchparser/balanced'
-# require 'searchparser/boolean_keyword_parser'
+require 'searchparser/boolean_keyword'
