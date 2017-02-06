@@ -16,7 +16,7 @@ module SearchParser
 
     rule(:plus) { str('+') }
     rule(:minus) { str('-') }
-    rule(:dash) { minus }
+    rule(:dash) { str('-') }
 
     rule(:dq) { str('"') }
     rule(:sq) { str("'") }
@@ -32,7 +32,7 @@ module SearchParser
 
     rule(:digit) { match('\d') }
     rule(:digits) { digit.repeat(1) }
-    rule(:digits?) { digit.repeat(0) }
+    rule(:digits?) { digits.maybe }
 
   end
 end
